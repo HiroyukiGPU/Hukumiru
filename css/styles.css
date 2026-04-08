@@ -1,0 +1,275 @@
+/* ===== デザイントークン ===== */
+:root {
+  --color-primary: #2563EB;
+  --color-bg: #F8FAFC;
+  --color-surface: #FFFFFF;
+  --color-text-primary: #0F172A;
+  --color-text-secondary: #475569;
+
+  --temp-30: #EF4444;
+  --temp-25: #F97316;
+  --temp-20: #22C55E;
+  --temp-15: #06B6D4;
+  --temp-10: #3B82F6;
+  --temp-5: #6366F1;
+  --temp-cold: #111827;
+
+  --radius-card: 16px;
+  --shadow-card: 0 4px 12px rgba(0,0,0,0.06);
+  --space-4: 4px;
+  --space-8: 8px;
+  --space-12: 12px;
+  --space-16: 16px;
+  --space-24: 24px;
+  --space-32: 32px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg: #020617;
+    --color-surface: #0F172A;
+    --color-text-primary: #E2E8F0;
+    --color-text-secondary: #94A3B8;
+    --shadow-card: 0 4px 12px rgba(0,0,0,0.3);
+  }
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans JP", sans-serif;
+  background: var(--color-bg);
+  color: var(--color-text-primary);
+  line-height: 1.5;
+  min-height: 100vh;
+}
+
+.app-header {
+  background: var(--color-surface);
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  padding: var(--space-16);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+.header-inner {
+  max-width: 720px;
+  margin: 0 auto;
+}
+.location-info {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-8);
+}
+.location-info span:first-child {
+  font-size: 18px;
+  font-weight: 600;
+}
+.date-label {
+  font-size: 13px;
+  color: var(--color-text-secondary);
+}
+
+.app-main {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: var(--space-24) var(--space-16);
+}
+
+.cards-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+}
+
+.weather-card {
+  background: var(--color-surface);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  display: flex;
+  overflow: hidden;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  cursor: default;
+}
+.weather-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+}
+.card-accent {
+  width: 4px;
+  flex-shrink: 0;
+}
+.card-body {
+  padding: var(--space-16) 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.period-label {
+  font-size: 20px;
+  font-weight: 600;
+}
+.period-range {
+  font-size: 13px;
+  color: var(--color-text-secondary);
+}
+.temp-display {
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+.card-footer {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+}
+.clothing-label {
+  font-size: 17px;
+  font-weight: 600;
+}
+.clothing-icon {
+  font-size: 24px;
+}
+
+.skeleton-card {
+  background: var(--color-surface);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  height: 120px;
+  overflow: hidden;
+  position: relative;
+}
+.skeleton-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.05) 50%, transparent 100%);
+  animation: shimmer 1.4s infinite;
+}
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.error-state {
+  text-align: center;
+  padding: var(--space-32);
+  color: var(--color-text-secondary);
+}
+.error-state h2 { color: var(--color-text-primary); margin-bottom: var(--space-8); }
+.error-state p { margin-bottom: var(--space-16); }
+
+.btn {
+  padding: var(--space-8) var(--space-16);
+  border-radius: 8px;
+  border: none;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.1s ease;
+}
+.btn:active { transform: scale(0.98); }
+.btn:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 2px; }
+.btn-primary { background: var(--color-primary); color: #fff; }
+.btn-secondary { background: transparent; color: var(--color-text-secondary); border: 1px solid currentColor; }
+
+.settings-fab {
+  position: fixed;
+  bottom: var(--space-24);
+  right: var(--space-24);
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 16px rgba(37,99,235,0.4);
+  transition: transform 0.1s ease;
+  z-index: 20;
+}
+.settings-fab:active { transform: scale(0.95); }
+.settings-fab:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 3px; }
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  animation: fadeIn 0.2s ease;
+}
+.modal-overlay[hidden] { display: none; }
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.modal-dialog {
+  background: var(--color-surface);
+  border-radius: var(--radius-card);
+  padding: var(--space-24);
+  width: min(400px, 90vw);
+  animation: slideUp 0.2s ease;
+}
+@keyframes slideUp {
+  from { transform: translateY(16px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+.modal-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: var(--space-16);
+}
+.period-fieldset {
+  border: 1px solid rgba(0,0,0,0.1);
+  border-radius: 8px;
+  padding: var(--space-12);
+  margin-bottom: var(--space-12);
+}
+.period-fieldset legend {
+  font-weight: 600;
+  padding: 0 var(--space-4);
+}
+.period-fieldset label {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  margin-top: var(--space-8);
+  font-size: 14px;
+}
+.period-fieldset input[type="number"] {
+  width: 60px;
+  padding: var(--space-4) var(--space-8);
+  border: 1px solid rgba(0,0,0,0.2);
+  border-radius: 6px;
+  background: var(--color-bg);
+  color: var(--color-text-primary);
+  font-size: 14px;
+}
+.period-fieldset input:focus-visible {
+  outline: 2px solid var(--color-primary);
+}
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-8);
+  margin-top: var(--space-16);
+}
+
+@media (max-width: 480px) {
+  .app-main { padding: var(--space-16) var(--space-12); }
+  .temp-display { font-size: 28px; }
+  .period-label { font-size: 17px; }
+  .settings-fab { bottom: var(--space-16); right: var(--space-16); }
+}
