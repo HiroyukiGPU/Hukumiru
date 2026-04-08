@@ -9,9 +9,9 @@ import { calcApparentTemp, average } from './temperature.js';
 
 /** @type {TimeSettings} */
 const DEFAULT_SETTINGS = {
-  morning:   { start: 5,  end: 10 },
-  afternoon: { start: 10, end: 16 },
-  night:     { start: 16, end: 23 },
+  morning:   { start: 6,  end: 10 },
+  afternoon: { start: 10, end: 18 },
+  night:     { start: 18, end: 23 },
 };
 
 const PERIOD_LABELS = {
@@ -58,7 +58,7 @@ function calcPeriodAverages(hourly, settings) {
     );
 
     for (const [period, range] of Object.entries(settings)) {
-      if (hour >= range.start && hour < range.end) {
+      if (hour >= range.start && hour <= range.end) {
         periods[period].push(apparentTemp);
       }
     }
