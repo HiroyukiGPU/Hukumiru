@@ -14,6 +14,12 @@ const DEFAULT_SETTINGS = {
   night:     { start: 16, end: 23 },
 };
 
+const PERIOD_LABELS = {
+  morning: '朝',
+  afternoon: '昼',
+  night: '夜',
+};
+
 /**
  * 設定をLocalStorageから読み込む（なければデフォルト）
  * @returns {TimeSettings}
@@ -72,11 +78,16 @@ function calcPeriodAverages(hourly, settings) {
  */
 function validateSettings(settings) {
   for (const [name, range] of Object.entries(settings)) {
+    const label = PERIOD_LABELS[name] ?? name;
+
+    if (!Number.isInteger(range.start) || !Number.isInteger(range.end)) {
+      return `${label}の開始・終了時間は整数で入力してください`;
+    }
     if (range.start < 0 || range.start > 23 || range.end < 0 || range.end > 23) {
-      return `${name}の時間が0〜23の範囲外です`;
+      return `${label}の時間は0〜23の範囲で入力してください`;
     }
     if (range.start >= range.end) {
-      return `${name}の開始時間は終了時間より前にしてください`;
+      return `${label}の開始時間は終了時間より前にしてください`;
     }
   }
   return null;

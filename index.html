@@ -29,31 +29,114 @@
   </button>
 
   <!-- 設定モーダル -->
-  <div id="settings-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-title" hidden>
+  <div id="settings-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-describedby="modal-description" hidden>
     <div class="modal-dialog">
-      <h2 id="modal-title" class="modal-title">時間帯設定</h2>
-      <form id="settings-form">
-        <fieldset class="period-fieldset">
-          <legend>朝</legend>
-          <label for="morning-start">開始</label>
-          <input type="number" id="morning-start" min="0" max="23" step="1">
-          <label for="morning-end">終了</label>
-          <input type="number" id="morning-end" min="0" max="23" step="1">
-        </fieldset>
-        <fieldset class="period-fieldset">
-          <legend>昼</legend>
-          <label for="afternoon-start">開始</label>
-          <input type="number" id="afternoon-start" min="0" max="23" step="1">
-          <label for="afternoon-end">終了</label>
-          <input type="number" id="afternoon-end" min="0" max="23" step="1">
-        </fieldset>
-        <fieldset class="period-fieldset">
-          <legend>夜</legend>
-          <label for="night-start">開始</label>
-          <input type="number" id="night-start" min="0" max="23" step="1">
-          <label for="night-end">終了</label>
-          <input type="number" id="night-end" min="0" max="23" step="1">
-        </fieldset>
+      <button type="button" id="settings-close" class="modal-close" aria-label="設定を閉じる">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path d="M18 6 6 18"/>
+          <path d="m6 6 12 12"/>
+        </svg>
+      </button>
+
+      <div class="modal-header">
+        <p class="modal-eyebrow">Customize Time Periods</p>
+        <h2 id="modal-title" class="modal-title">時間帯設定</h2>
+        <p id="modal-description" class="modal-description">
+          朝・昼・夜の区切りを、あなたの生活リズムに合わせて調整できます。
+        </p>
+      </div>
+
+      <form id="settings-form" novalidate>
+        <div class="settings-intro" aria-hidden="true">
+          <span class="settings-intro-badge">24時間表記</span>
+          <p>0〜23の整数で入力してください。保存するとカード表示にすぐ反映されます。</p>
+        </div>
+
+        <div class="period-settings">
+          <fieldset class="period-fieldset" data-period="morning">
+            <legend class="sr-only">朝</legend>
+            <div class="period-card-header">
+              <div class="period-heading">
+                <span class="period-chip">朝</span>
+                <p class="period-note">外出前の体感に合わせる時間帯</p>
+              </div>
+              <output id="morning-preview" class="period-preview" for="morning-start morning-end">5時〜10時</output>
+            </div>
+            <div class="time-input-grid">
+              <label class="time-input" for="morning-start">
+                <span class="time-label">開始</span>
+                <span class="time-control">
+                  <input type="number" id="morning-start" min="0" max="23" step="1" inputmode="numeric">
+                  <span class="time-unit">時</span>
+                </span>
+              </label>
+              <label class="time-input" for="morning-end">
+                <span class="time-label">終了</span>
+                <span class="time-control">
+                  <input type="number" id="morning-end" min="0" max="23" step="1" inputmode="numeric">
+                  <span class="time-unit">時</span>
+                </span>
+              </label>
+            </div>
+          </fieldset>
+
+          <fieldset class="period-fieldset" data-period="afternoon">
+            <legend class="sr-only">昼</legend>
+            <div class="period-card-header">
+              <div class="period-heading">
+                <span class="period-chip">昼</span>
+                <p class="period-note">日中の服装提案に使う時間帯</p>
+              </div>
+              <output id="afternoon-preview" class="period-preview" for="afternoon-start afternoon-end">10時〜16時</output>
+            </div>
+            <div class="time-input-grid">
+              <label class="time-input" for="afternoon-start">
+                <span class="time-label">開始</span>
+                <span class="time-control">
+                  <input type="number" id="afternoon-start" min="0" max="23" step="1" inputmode="numeric">
+                  <span class="time-unit">時</span>
+                </span>
+              </label>
+              <label class="time-input" for="afternoon-end">
+                <span class="time-label">終了</span>
+                <span class="time-control">
+                  <input type="number" id="afternoon-end" min="0" max="23" step="1" inputmode="numeric">
+                  <span class="time-unit">時</span>
+                </span>
+              </label>
+            </div>
+          </fieldset>
+
+          <fieldset class="period-fieldset" data-period="night">
+            <legend class="sr-only">夜</legend>
+            <div class="period-card-header">
+              <div class="period-heading">
+                <span class="period-chip">夜</span>
+                <p class="period-note">帰宅後や夜の外出に近い時間帯</p>
+              </div>
+              <output id="night-preview" class="period-preview" for="night-start night-end">16時〜23時</output>
+            </div>
+            <div class="time-input-grid">
+              <label class="time-input" for="night-start">
+                <span class="time-label">開始</span>
+                <span class="time-control">
+                  <input type="number" id="night-start" min="0" max="23" step="1" inputmode="numeric">
+                  <span class="time-unit">時</span>
+                </span>
+              </label>
+              <label class="time-input" for="night-end">
+                <span class="time-label">終了</span>
+                <span class="time-control">
+                  <input type="number" id="night-end" min="0" max="23" step="1" inputmode="numeric">
+                  <span class="time-unit">時</span>
+                </span>
+              </label>
+            </div>
+          </fieldset>
+        </div>
+
+        <p id="settings-error" class="settings-error" role="alert" hidden></p>
+
         <div class="modal-actions">
           <button type="button" id="settings-cancel" class="btn btn-secondary">キャンセル</button>
           <button type="submit" class="btn btn-primary">保存</button>
