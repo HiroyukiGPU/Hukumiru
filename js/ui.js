@@ -37,10 +37,11 @@ function showError(message, onRetry) {
   container.innerHTML = `
     <div class="error-state">
       <h2>データを取得できませんでした</h2>
-      <p>${message}</p>
+      <p id="error-message"></p>
       <button class="btn btn-primary" id="retry-btn">再試行</button>
     </div>
   `;
+  document.getElementById('error-message').textContent = message;
   document.getElementById('retry-btn').addEventListener('click', onRetry);
 }
 
