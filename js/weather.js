@@ -11,11 +11,12 @@ const API_BASE = 'https://api.open-meteo.com/v1/forecast';
  */
 async function fetchWeather(lat, lon) {
   const params = new URLSearchParams({
-    latitude:  String(lat),
-    longitude: String(lon),
-    hourly:    'temperature_2m,relativehumidity_2m,wind_speed_10m',
-    timezone:  'Asia/Tokyo',
-    forecast_days: '1',
+    latitude:        String(lat),
+    longitude:       String(lon),
+    hourly:          'temperature_2m,relativehumidity_2m,wind_speed_10m',
+    timezone:        'Asia/Tokyo',
+    forecast_days:   '1',
+    wind_speed_unit: 'ms',
   });
 
   const res = await fetch(`${API_BASE}?${params}`);

@@ -2,15 +2,17 @@
 // 体感温度の算出と服装分類ロジック
 
 /**
- * ミスナール改良式による体感温度を算出する
- * T_app = T + 0.33 * H - 0.7 * V - 4.0
+ * Steadman式による体感温度を算出する
+ * T_app = T + 0.33 * e - 0.7 * V - 4.0
+ * e = 水蒸気圧 (hPa) = (RH/100) * 6.105 * exp(17.27 * T / (237.7 + T))
  * @param {number} temp - 気温 (℃)
  * @param {number} humidity - 相対湿度 (%)
  * @param {number} windSpeed - 風速 (m/s)
  * @returns {number} 体感温度 (℃)
  */
 function calcApparentTemp(temp, humidity, windSpeed) {
-  return temp + 0.33 * humidity - 0.7 * windSpeed - 4.0;
+  const e = (humidity / 100) * 6.105 * Math.exp(17.27 * temp / (237.7 + temp));
+  return temp + 0.33 * e - 0.7 * windSpeed - 4.0;
 }
 
 /**
