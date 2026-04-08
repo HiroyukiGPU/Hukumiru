@@ -37,15 +37,20 @@ function saveTimeSettings(settings) {
 }
 
 /**
- * Open-Meteoのhourlyデータから各時間帯の平均体感温度を算出する
- * @param {{ time: string[], temperature_2m: number[], relativehumidity_2m: number[], wind_speed_10m: number[] }} hourly
+ * Open-Meteoのhourlyデータから各時間帯の集計値を算出する
+ * @param {{ time: string[], temperature_2m: number[], relativehumidity_2m: number[], wind_speed_10m: number[], precipitation_probability: number[] }} hourly
  * @param {TimeSettings} settings
- * @returns {{ morning: number, afternoon: number, night: number }}
+ * @returns {{ morning: PeriodData, afternoon: PeriodData, night: PeriodData }}
+ * @typedef {{ apparentTemp: number, actualTemp: number, precipProb: number }} PeriodData
  */
 function calcPeriodAverages(hourly, settings) {
-  const today = new Date().toISOString().slice(0, 10); // "YYYY-MM-DD"
+  const today = new Date().toISOString().slice(0, 10);
 
-  const periods = { morning: [], afternoon: [], night: [] };
+  const periods = {
+    morning:   { apparentTemps: [], actualTemps: [], precipProbs: [] },
+    afternoon: { apparentTemps: [], actualTemps: [], precipProbs: [] },
+    night:     { apparentTemps: [], actualTemps: [], precipProbs: [] },
+  };
 
   hourly.time.forEach((timeStr, i) => {
     if (!timeStr.startsWith(today)) return;
@@ -59,15 +64,23 @@ function calcPeriodAverages(hourly, settings) {
 
     for (const [period, range] of Object.entries(settings)) {
       if (hour >= range.start && hour <= range.end) {
-        periods[period].push(apparentTemp);
+        periods[period].apparentTemps.push(apparentTemp);
+        periods[period].actualTemps.push(hourly.temperature_2m[i]);
+        periods[period].precipProbs.push(hourly.precipitation_probability[i] ?? 0);
       }
     }
   });
 
+  const summarize = ({ apparentTemps, actualTemps, precipProbs }) => ({
+    apparentTemp: average(apparentTemps),
+    actualTemp:   average(actualTemps),
+    precipProb:   precipProbs.length > 0 ? Math.max(...precipProbs) : 0,
+  });
+
   return {
-    morning:   average(periods.morning),
-    afternoon: average(periods.afternoon),
-    night:     average(periods.night),
+    morning:   summarize(periods.morning),
+    afternoon: summarize(periods.afternoon),
+    night:     summarize(periods.night),
   };
 }
 
