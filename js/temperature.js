@@ -18,16 +18,16 @@ function calcApparentTemp(temp, humidity, windSpeed) {
 /**
  * 体感温度から服装カテゴリを決定する
  * @param {number} apparentTemp - 体感温度 (℃)
- * @returns {{ label: string, icon: string, colorVar: string }}
+ * @returns {{ label: string, colorVar: string }}
  */
 function classifyClothing(apparentTemp) {
-  if (apparentTemp >= 30) return { label: 'ノースリーブ', icon: '🩴', colorVar: '--temp-30' };
-  if (apparentTemp >= 25) return { label: '半袖',         icon: '👕', colorVar: '--temp-25' };
-  if (apparentTemp >= 20) return { label: '長袖',         icon: '👔', colorVar: '--temp-20' };
-  if (apparentTemp >= 15) return { label: 'カーディガン', icon: '🧥', colorVar: '--temp-15' };
-  if (apparentTemp >= 10) return { label: 'ジャケット',   icon: '🧣', colorVar: '--temp-10' };
-  if (apparentTemp >= 5)  return { label: 'コート',       icon: '🧤', colorVar: '--temp-5'  };
-  return                         { label: 'ダウン',       icon: '🫧', colorVar: '--temp-cold' };
+  if (apparentTemp >= 30) return { label: 'ノースリーブ', colorVar: '--temp-30' };
+  if (apparentTemp >= 25) return { label: '半袖',         colorVar: '--temp-25' };
+  if (apparentTemp >= 20) return { label: '長袖',         colorVar: '--temp-20' };
+  if (apparentTemp >= 15) return { label: 'カーディガン', colorVar: '--temp-15' };
+  if (apparentTemp >= 10) return { label: 'ジャケット',   colorVar: '--temp-10' };
+  if (apparentTemp >= 5)  return { label: 'コート',       colorVar: '--temp-5'  };
+  return                         { label: 'ダウン',       colorVar: '--temp-cold' };
 }
 
 /**
