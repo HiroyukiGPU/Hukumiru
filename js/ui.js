@@ -47,7 +47,7 @@ function showError(message, onRetry) {
 
 /**
  * 時間帯カードを3枚レンダリングする
- * @param {{ morning: number, afternoon: number, night: number }} averages
+ * @param {{ morning: {apparentTemp:number, actualTemp:number, precipProb:number}, afternoon: {apparentTemp:number, actualTemp:number, precipProb:number}, night: {apparentTemp:number, actualTemp:number, precipProb:number} }} averages
  * @param {{ morning: {start:number,end:number}, afternoon: {start:number,end:number}, night: {start:number,end:number} }} settings
  */
 function renderCards(averages, settings) {
@@ -58,10 +58,11 @@ function renderCards(averages, settings) {
   ];
 
   container.innerHTML = periods.map(({ key, label }) => {
-    const temp = averages[key];
-    const clothing = classifyClothing(temp);
+    const { apparentTemp, actualTemp, precipProb } = averages[key];
+    const clothing = classifyClothing(apparentTemp);
     const range = settings[key];
     const accentColor = `var(${clothing.colorVar})`;
+    const precipIcon = precipProb >= 30 ? '☂' : '🌤';
 
     return `
       <article class="weather-card" aria-label="${label}の服装提案">
@@ -70,13 +71,17 @@ function renderCards(averages, settings) {
           <div class="card-header">
             <span class="period-label">${label}</span>
             <span class="period-range">${range.start}時〜${range.end}時</span>
+            <span class="actual-temp" aria-label="実気温">🌡 ${Math.round(actualTemp)}℃</span>
           </div>
           <div class="temp-display" style="color:${accentColor}">
-            ${temp.toFixed(1)}℃
+            ${apparentTemp.toFixed(1)}℃
           </div>
           <div class="card-footer">
             <span class="clothing-icon" aria-hidden="true">${clothing.icon}</span>
             <span class="clothing-label">${clothing.label}</span>
+            <span class="precip-info" aria-label="降水確率 ${precipProb}パーセント">
+              <span aria-hidden="true">${precipIcon}</span>${precipProb}%
+            </span>
           </div>
         </div>
       </article>
