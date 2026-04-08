@@ -39,7 +39,7 @@ async function rerender() {
     const averages = calcPeriodAverages(hourly, settings);
     renderCards(averages, settings);
   } catch (err) {
-    showError(err.message, run);
+    showError(err.message, rerender);
   }
 }
 
