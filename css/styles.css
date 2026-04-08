@@ -98,7 +98,143 @@ body {
   gap: var(--space-16);
 }
 
+.daily-summary-card {
+  --summary-accent: var(--color-primary);
+  position: relative;
+  overflow: hidden;
+  padding: var(--space-24);
+  border-radius: 24px;
+  background:
+    linear-gradient(140deg, var(--color-surface), var(--color-surface-muted));
+  border: 1px solid var(--color-border);
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.10);
+  display: grid;
+  gap: var(--space-16);
+}
+.daily-summary-card::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 6px;
+  background: var(--summary-accent);
+}
+.summary-kicker {
+  color: var(--summary-accent);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.summary-main {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+.summary-icon {
+  width: 88px;
+  height: 88px;
+  border-radius: 24px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 42px;
+  flex-shrink: 0;
+}
+.summary-copy {
+  display: grid;
+  gap: 4px;
+}
+.summary-caption {
+  color: var(--color-text-secondary);
+  font-size: 13px;
+  font-weight: 600;
+}
+.summary-title {
+  color: var(--summary-accent);
+  font-size: clamp(38px, 8vw, 52px);
+  line-height: 1;
+  font-weight: 800;
+  letter-spacing: -0.05em;
+}
+.summary-support {
+  color: var(--color-text-primary);
+  font-size: 15px;
+  font-weight: 600;
+}
+.summary-note {
+  padding: 14px 16px;
+  border-radius: 18px;
+  background: rgba(15, 23, 42, 0.04);
+  color: var(--color-text-secondary);
+  font-size: 14px;
+}
+.summary-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-12);
+}
+.summary-metric {
+  display: grid;
+  gap: 4px;
+  padding: 14px 16px;
+  border-radius: 18px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+}
+.summary-metric-label {
+  color: var(--color-text-secondary);
+  font-size: 12px;
+  font-weight: 600;
+}
+.summary-metric strong {
+  color: var(--color-text-primary);
+  font-size: 26px;
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+.summary-metric span:last-child {
+  color: var(--color-text-secondary);
+  font-size: 13px;
+}
+.summary-periods {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-8);
+}
+.summary-period-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-primary);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.detail-section-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--space-12);
+  margin-top: 4px;
+}
+.detail-section-title {
+  color: var(--color-text-primary);
+  font-size: 16px;
+  font-weight: 700;
+}
+.detail-section-note {
+  color: var(--color-text-secondary);
+  font-size: 13px;
+}
+
 .weather-card {
+  --card-accent: var(--color-primary);
   background: var(--color-surface);
   border-radius: var(--radius-card);
   box-shadow: var(--shadow-card);
@@ -111,75 +247,121 @@ body {
   transform: translateY(-2px);
   box-shadow: 0 8px 24px rgba(0,0,0,0.1);
 }
-
-/* ===== サブ情報（実気温・降水確率） ===== */
-.actual-temp {
-  font-size: 13px;
-  color: var(--color-text-secondary);
-  margin-left: auto;
-}
-
-.precip-info {
-  font-size: 13px;
-  color: var(--color-text-secondary);
-  margin-left: auto;
-}
-
-.precip-info--rain {
-  color: var(--color-primary);
-  font-weight: 600;
-}
-
 .card-accent {
-  width: 4px;
+  width: 6px;
   flex-shrink: 0;
+  background: var(--card-accent);
 }
 .card-body {
-  padding: var(--space-16) var(--space-20);
+  padding: var(--space-20);
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: var(--space-8);
+  gap: var(--space-16);
 }
 .card-header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
+  gap: var(--space-12);
+}
+.card-heading-group {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 6px;
 }
 .period-label {
   font-size: 20px;
-  font-weight: 600;
+  font-weight: 700;
 }
 .period-range {
   font-size: 13px;
   color: var(--color-text-secondary);
 }
-.temp-display {
-  font-size: 36px;
-  font-weight: 700;
-  line-height: 1.2;
-}
-.card-section {
-  display: flex;
-  flex-direction: column;
+.recommend-badge {
+  display: inline-flex;
   align-items: center;
-  padding: var(--space-8) 0;
-  border-top: 1px solid var(--color-border);
-  border-bottom: 1px solid var(--color-border);
-}
-.temp-label {
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: var(--color-surface-muted);
+  color: var(--card-accent);
   font-size: 12px;
-  color: var(--color-text-secondary);
-  margin-top: 2px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
 }
-.card-footer {
+.recommendation-hero {
   display: flex;
   align-items: center;
-  gap: var(--space-8);
+  gap: var(--space-16);
+  padding: var(--space-16);
+  border-radius: 20px;
+  background:
+    linear-gradient(135deg, var(--color-surface-muted), transparent 70%),
+    var(--color-bg);
+  border: 1px solid var(--color-border);
 }
-.clothing-label {
-  font-size: 17px;
+.recommendation-icon {
+  width: 72px;
+  height: 72px;
+  border-radius: 22px;
+  background: var(--color-surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 34px;
+  box-shadow: 0 10px 22px rgba(15, 23, 42, 0.08);
+  flex-shrink: 0;
+}
+.recommendation-copy {
+  display: grid;
+  gap: 4px;
+}
+.recommendation-label {
+  color: var(--color-text-secondary);
+  font-size: 13px;
   font-weight: 600;
+}
+.clothing-name {
+  font-size: clamp(32px, 6vw, 44px);
+  line-height: 1.05;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  color: var(--card-accent);
+}
+.recommendation-text {
+  color: var(--color-text-secondary);
+  font-size: 14px;
+}
+.card-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-12);
+}
+.metric-chip {
+  display: grid;
+  gap: 4px;
+  padding: 12px 14px;
+  border-radius: 16px;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+}
+.metric-label {
+  color: var(--color-text-secondary);
+  font-size: 12px;
+  font-weight: 600;
+}
+.metric-value {
+  color: var(--color-text-primary);
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+.metric-value--accent {
+  color: var(--card-accent);
+}
+.metric-value--rain {
+  color: var(--color-primary);
 }
 
 .skeleton-card {
@@ -196,6 +378,9 @@ body {
   inset: 0;
   background: linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.05) 50%, transparent 100%);
   animation: shimmer 1.4s infinite;
+}
+.skeleton-card--summary {
+  height: 220px;
 }
 @keyframes shimmer {
   0% { transform: translateX(-100%); }
@@ -510,9 +695,47 @@ body {
 
 @media (max-width: 480px) {
   .app-main { padding: var(--space-16) var(--space-12); }
-  .temp-display { font-size: 28px; }
+  .daily-summary-card {
+    padding: var(--space-20);
+  }
+  .summary-main,
+  .detail-section-heading {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .summary-icon {
+    width: 72px;
+    height: 72px;
+    font-size: 34px;
+  }
+  .summary-title {
+    font-size: 40px;
+  }
+  .summary-metrics {
+    grid-template-columns: 1fr;
+  }
   .period-label { font-size: 17px; }
   .settings-fab { bottom: var(--space-16); right: var(--space-16); }
+  .card-body {
+    padding: var(--space-16);
+    gap: var(--space-12);
+  }
+  .card-header,
+  .recommendation-hero {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .recommendation-icon {
+    width: 60px;
+    height: 60px;
+    font-size: 28px;
+  }
+  .clothing-name {
+    font-size: 34px;
+  }
+  .card-metrics {
+    grid-template-columns: 1fr;
+  }
   .modal-overlay { padding: var(--space-12); }
   .modal-dialog {
     padding: var(--space-20);

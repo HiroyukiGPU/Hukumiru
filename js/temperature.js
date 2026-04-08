@@ -18,16 +18,16 @@ function calcApparentTemp(temp, humidity, windSpeed) {
 /**
  * 体感温度から服装カテゴリを決定する
  * @param {number} apparentTemp - 体感温度 (℃)
- * @returns {{ label: string, colorVar: string }}
+ * @returns {{ label: string, icon: string, colorVar: string, advice: string }}
  */
 function classifyClothing(apparentTemp) {
-  if (apparentTemp >= 30) return { label: 'ノースリーブ', colorVar: '--temp-30' };
-  if (apparentTemp >= 25) return { label: '半袖',         colorVar: '--temp-25' };
-  if (apparentTemp >= 20) return { label: '長袖',         colorVar: '--temp-20' };
-  if (apparentTemp >= 15) return { label: 'カーディガン', colorVar: '--temp-15' };
-  if (apparentTemp >= 10) return { label: 'ジャケット',   colorVar: '--temp-10' };
-  if (apparentTemp >= 5)  return { label: 'コート',       colorVar: '--temp-5'  };
-  return                         { label: 'ダウン',       colorVar: '--temp-cold' };
+  if (apparentTemp >= 30) return { label: 'ノースリーブ', icon: '☀️', colorVar: '--temp-30', advice: 'かなり暑いので、できるだけ軽い服装がおすすめです' };
+  if (apparentTemp >= 25) return { label: '半袖',         icon: '👕', colorVar: '--temp-25', advice: '日中は半袖がちょうどよく、羽織りは基本不要です' };
+  if (apparentTemp >= 20) return { label: '長袖',         icon: '🧶', colorVar: '--temp-20', advice: '薄手の長袖を基準にすると快適に過ごせます' };
+  if (apparentTemp >= 15) return { label: 'カーディガン', icon: '🧥', colorVar: '--temp-15', advice: '長袖に軽い羽織りを足すと温度差に対応しやすいです' };
+  if (apparentTemp >= 10) return { label: 'ジャケット',   icon: '🧥', colorVar: '--temp-10', advice: '外にいる時間があるなら、上着を前提にしたい体感です' };
+  if (apparentTemp >= 5)  return { label: 'コート',       icon: '🧣', colorVar: '--temp-5',  advice: 'しっかり防寒できるアウターを選ぶと安心です' };
+  return                         { label: 'ダウン',       icon: '🥶', colorVar: '--temp-cold', advice: '厚手の防寒着を主役にしたい寒さです' };
 }
 
 /**
