@@ -22,7 +22,7 @@
   --period-afternoon: #0EA5E9;
   --period-night: #6366F1;
 
-  --radius-card: 16px;
+  --radius-card: 8px;
   --radius-md: 8px;
   --radius-sm: 6px;
   --shadow-card: 0 4px 12px rgba(0,0,0,0.06);
@@ -123,9 +123,11 @@ body {
   font-size: 13px;
   color: var(--color-text-secondary);
   margin-left: auto;
-  display: flex;
-  align-items: center;
-  gap: 2px;
+}
+
+.precip-info--rain {
+  color: var(--color-primary);
+  font-weight: 600;
 }
 
 .card-accent {
@@ -157,6 +159,19 @@ body {
   font-weight: 700;
   line-height: 1.2;
 }
+.card-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--space-8) 0;
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+}
+.temp-label {
+  font-size: 12px;
+  color: var(--color-text-secondary);
+  margin-top: 2px;
+}
 .card-footer {
   display: flex;
   align-items: center;
@@ -165,9 +180,6 @@ body {
 .clothing-label {
   font-size: 17px;
   font-weight: 600;
-}
-.clothing-icon {
-  font-size: 24px;
 }
 
 .skeleton-card {
