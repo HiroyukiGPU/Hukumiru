@@ -111,6 +111,23 @@ body {
   transform: translateY(-2px);
   box-shadow: 0 8px 24px rgba(0,0,0,0.1);
 }
+
+/* ===== サブ情報（実気温・降水確率） ===== */
+.actual-temp {
+  font-size: 13px;
+  color: var(--color-text-secondary);
+  margin-left: auto;
+}
+
+.precip-info {
+  font-size: 13px;
+  color: var(--color-text-secondary);
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
 .card-accent {
   width: 4px;
   flex-shrink: 0;
