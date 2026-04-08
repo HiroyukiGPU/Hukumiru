@@ -15,11 +15,14 @@
   --temp-cold: #111827;
 
   --radius-card: 16px;
+  --radius-md: 8px;
+  --radius-sm: 6px;
   --shadow-card: 0 4px 12px rgba(0,0,0,0.06);
   --space-4: 4px;
   --space-8: 8px;
   --space-12: 12px;
   --space-16: 16px;
+  --space-20: 20px;
   --space-24: 24px;
   --space-32: 32px;
 }
@@ -61,7 +64,7 @@ body {
   align-items: baseline;
   gap: var(--space-8);
 }
-.location-info span:first-child {
+.location-name {
   font-size: 18px;
   font-weight: 600;
 }
@@ -100,7 +103,7 @@ body {
   flex-shrink: 0;
 }
 .card-body {
-  padding: var(--space-16) 20px;
+  padding: var(--space-16) var(--space-20);
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -167,7 +170,7 @@ body {
 
 .btn {
   padding: var(--space-8) var(--space-16);
-  border-radius: 8px;
+  border-radius: var(--radius-md);
   border: none;
   font-size: 14px;
   font-weight: 600;
@@ -233,7 +236,7 @@ body {
 }
 .period-fieldset {
   border: 1px solid rgba(0,0,0,0.1);
-  border-radius: 8px;
+  border-radius: var(--radius-md);
   padding: var(--space-12);
   margin-bottom: var(--space-12);
 }
@@ -252,7 +255,7 @@ body {
   width: 60px;
   padding: var(--space-4) var(--space-8);
   border: 1px solid rgba(0,0,0,0.2);
-  border-radius: 6px;
+  border-radius: var(--radius-sm);
   background: var(--color-bg);
   color: var(--color-text-primary);
   font-size: 14px;
@@ -272,4 +275,12 @@ body {
   .temp-display { font-size: 28px; }
   .period-label { font-size: 17px; }
   .settings-fab { bottom: var(--space-16); right: var(--space-16); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

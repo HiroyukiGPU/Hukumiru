@@ -10,7 +10,7 @@
   <header class="app-header">
     <div class="header-inner">
       <div class="location-info">
-        <span id="location-name">取得中...</span>
+        <span id="location-name" class="location-name">取得中...</span>
         <span id="current-date" class="date-label"></span>
       </div>
     </div>
@@ -29,24 +29,30 @@
   </button>
 
   <!-- 設定モーダル -->
-  <div id="settings-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-label="時間帯設定" hidden>
+  <div id="settings-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-title" hidden>
     <div class="modal-dialog">
-      <h2 class="modal-title">時間帯設定</h2>
+      <h2 id="modal-title" class="modal-title">時間帯設定</h2>
       <form id="settings-form">
         <fieldset class="period-fieldset">
           <legend>朝</legend>
-          <label>開始 <input type="number" id="morning-start" min="0" max="23"></label>
-          <label>終了 <input type="number" id="morning-end" min="0" max="23"></label>
+          <label for="morning-start">開始</label>
+          <input type="number" id="morning-start" min="0" max="23" step="1">
+          <label for="morning-end">終了</label>
+          <input type="number" id="morning-end" min="0" max="23" step="1">
         </fieldset>
         <fieldset class="period-fieldset">
           <legend>昼</legend>
-          <label>開始 <input type="number" id="afternoon-start" min="0" max="23"></label>
-          <label>終了 <input type="number" id="afternoon-end" min="0" max="23"></label>
+          <label for="afternoon-start">開始</label>
+          <input type="number" id="afternoon-start" min="0" max="23" step="1">
+          <label for="afternoon-end">終了</label>
+          <input type="number" id="afternoon-end" min="0" max="23" step="1">
         </fieldset>
         <fieldset class="period-fieldset">
           <legend>夜</legend>
-          <label>開始 <input type="number" id="night-start" min="0" max="23"></label>
-          <label>終了 <input type="number" id="night-end" min="0" max="23"></label>
+          <label for="night-start">開始</label>
+          <input type="number" id="night-start" min="0" max="23" step="1">
+          <label for="night-end">終了</label>
+          <input type="number" id="night-end" min="0" max="23" step="1">
         </fieldset>
         <div class="modal-actions">
           <button type="button" id="settings-cancel" class="btn btn-secondary">キャンセル</button>
