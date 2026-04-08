@@ -13,7 +13,7 @@ async function fetchWeather(lat, lon) {
   const params = new URLSearchParams({
     latitude:        String(lat),
     longitude:       String(lon),
-    hourly:          'temperature_2m,relativehumidity_2m,wind_speed_10m',
+    hourly:          'temperature_2m,relativehumidity_2m,wind_speed_10m,precipitation_probability',
     timezone:        'Asia/Tokyo',
     forecast_days:   '1',
     wind_speed_unit: 'ms',
