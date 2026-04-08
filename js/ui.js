@@ -62,7 +62,7 @@ function renderCards(averages, settings) {
     const clothing = classifyClothing(apparentTemp);
     const range = settings[key];
     const accentColor = `var(${clothing.colorVar})`;
-    const precipIcon = precipProb >= 30 ? '☂' : '🌤';
+    const precipClass = precipProb >= 30 ? ' precip-info--rain' : '';
 
     return `
       <article class="weather-card" aria-label="${label}の服装提案">
@@ -71,17 +71,17 @@ function renderCards(averages, settings) {
           <div class="card-header">
             <span class="period-label">${label}</span>
             <span class="period-range">${range.start}時〜${range.end}時</span>
-            <span class="actual-temp" aria-label="実気温">🌡 ${Math.round(actualTemp)}℃</span>
+            <span class="actual-temp" aria-label="実気温">実 ${Math.round(actualTemp)}℃</span>
           </div>
-          <div class="temp-display" style="color:${accentColor}">
-            ${apparentTemp.toFixed(1)}℃
+          <div class="card-section">
+            <div class="temp-display" style="color:${accentColor}">
+              ${apparentTemp.toFixed(1)}℃
+            </div>
+            <span class="temp-label">体感温度</span>
           </div>
           <div class="card-footer">
-            <span class="clothing-icon" aria-hidden="true">${clothing.icon}</span>
             <span class="clothing-label">${clothing.label}</span>
-            <span class="precip-info" aria-label="降水確率 ${precipProb}パーセント">
-              <span aria-hidden="true">${precipIcon}</span>${precipProb}%
-            </span>
+            <span class="precip-info${precipClass}" aria-label="降水確率 ${precipProb}パーセント">降水 ${precipProb}%</span>
           </div>
         </div>
       </article>
